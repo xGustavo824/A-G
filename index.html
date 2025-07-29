@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gustavo & Ana Julia</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      text-align: center;
+    }
+
+    .container {
+      display: none;
+      padding: 20px;
+    }
+
+    .botao-entrada {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #0a0a0a;
+    }
+
+    .botao-entrada button {
+      background: #ff0000;
+      color: #fff;
+      font-size: 20px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff0000;
+      transition: all 0.3s ease;
+    }
+
+    .botao-entrada button:hover {
+      box-shadow: 0 0 20px #ff0000;
+    }
+
+    .foto {
+      margin-top: 20px;
+      position: relative;
+      width: 100%; /* Garantir que o contêiner ocupe toda a largura disponível */
+      max-width: 500px; /* Limita o tamanho máximo */
+      height: 400px; /* Altura do contêiner */
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #ff0000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Ajuste para não cortar a imagem */
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .foto img.active {
+      opacity: 1;
+    }
+
+    .contador {
+      font-size: 18px;
+      margin: 20px 0;
+    }
+
+    .mensagem {
+      font-size: 20px;
+      margin: 20px auto;
+      max-width: 500px;
+      line-height: 1.6;
+    }
+
+    .musica {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="botao-entrada">
+    <button onclick="mostrarConteudo()">❤️ Clique aqui ❤️</button>
+  </div>
+
+  <div class="container" id="conteudo">
+    <h1>Gustavo & Ana Julia</h1>
+
+    <div class="foto">
+      <img src="Imagens/I1.jpeg" alt="Foto 1" class="active">
+      <img src="Imagens/I2.jpeg" alt="Foto 2">
+      <img src="Imagens/I3.jpeg" alt="Foto 3">
+      <img src="Imagens/I4.jpeg" alt="Foto 4">
+      <img src="Imagens/I5.jpeg" alt="Foto 5">
+    </div>
+
+    <div class="contador" id="contador">
+      <!-- O contador será preenchido automaticamente -->
+    </div>
+
+    <div class="mensagem">
+      <p>
+        Meu amor,<br><br>
+        Cada momento ao seu lado é um verdadeiro presente, e a cada segundo que passa, meu amor por você só cresce. 
+        O tempo pode seguir seu curso, mas o que sinto por você se torna ainda mais forte, mais profundo, e mais eterno. 
+        Sou imensamente grato por sua existência, por me fazer sorrir em cada dia e transformar minha vida em um sonho. 
+        Te amo mais do que palavras podem expressar, infinitamente! ❤️
+      </p>
+    </div>
+
+    <div class="musica">
+      <!-- Embed do Spotify com o novo link -->
+      <iframe src="https://open.spotify.com/embed/track/1DLKuppSYytOuxhtI6KBGu?si=edfebf19b1d24ad2" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    </div>
+  </div>
+
+  <script>
+    function mostrarConteudo() {
+      document.querySelector(".botao-entrada").style.display = "none";
+      document.querySelector("#conteudo").style.display = "block";
+      iniciarContador();
+      iniciarCarrossel();
+    }
+
+    function iniciarContador() {
+      const inicio = new Date("2025-06-08T00:00:00");
+      const agora = new Date();
+      const diff = agora - inicio;
+
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diff / (1000 * 60)) % 60);
+      const segundos = Math.floor((diff / 1000) % 60);
+
+      const texto = `Estamos juntos há: ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos.`;
+      document.getElementById("contador").textContent = texto;
+
+      setTimeout(iniciarContador, 1000);
+    }
+
+    function iniciarCarrossel() {
+      let index = 0;
+      const fotos = document.querySelectorAll(".foto img");
+      
+      setInterval(() => {
+        fotos[index].classList.remove("active");
+        index = (index + 1) % fotos.length;
+        fotos[index].classList.add("active");
+      }, 10000); // Troca a foto a cada 3 segundos
+    }
+  </script>
+</body>
+</html>
